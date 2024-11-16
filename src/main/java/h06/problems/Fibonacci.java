@@ -5,20 +5,20 @@ import org.tudalgo.algoutils.student.annotation.StudentImplementationRequired;
 
 import static org.tudalgo.algoutils.student.Student.crash;
 
-/*
+/**
  * A class containing different implementations for computing the nth number in the Fibonacci sequence.
  *
  * @author Manuel Peters
  */
 public class Fibonacci {
 
-    /*
+    /**
      * Default Constructor for this class.
      */
     @DoNotTouch
     public Fibonacci() {}
 
-    /*
+    /**
      * Computes the nth number from the Fibonacci sequence recursively.
      *
      * @param n The index of the Fibonacci sequence to compute.
@@ -33,7 +33,7 @@ public class Fibonacci {
         }
     }
 
-    /*
+    /**
      * Computes the nth number from the Fibonacci sequence using a different recursive approach.
      *
      * @param n The index of the Fibonacci sequence to compute.
@@ -49,7 +49,7 @@ public class Fibonacci {
         return crash(); // TODO: H1.1 - remove if implemented
     }
 
-    /*
+    /**
      * Computes the nth number from the Fibonacci sequence iteratively.
      *
      * @param n The index of the Fibonacci sequence to compute.
