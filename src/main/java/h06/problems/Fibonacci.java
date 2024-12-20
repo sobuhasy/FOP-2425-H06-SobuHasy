@@ -41,12 +41,12 @@ public class Fibonacci {
      */
     @StudentImplementationRequired
     public static int fibonacciRecursiveDifferent(int n) {
-        return crash(); // TODO: H1.1 - remove if implemented
+        return doTheRecursion(0, 1, n);
     }
 
     @StudentImplementationRequired
     private static int doTheRecursion(int a, int b, int n) {
-        return crash(); // TODO: H1.1 - remove if implemented
+        return (n <= 0) ? a : doTheRecursion(b, a + b, n - 1);
     }
 
     /**
@@ -57,6 +57,15 @@ public class Fibonacci {
      */
     @StudentImplementationRequired
     public static int fibonacciIterative(int n) {
-        return crash(); // TODO: H1.2 - remove if implemented
+        if (n <= 1) {
+            return n;
+        }
+        int a = 0, b = 1;
+        for (int i = 2; i <= n; i++){
+            int temp = a + b;
+            a = b;
+            b = temp;
+        }
+        return b;
     }
 }

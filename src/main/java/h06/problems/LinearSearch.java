@@ -15,7 +15,7 @@ public class LinearSearch {
      */
     @StudentImplementationRequired
     public static int linearSearchRecursive(int[] arr, int target) {
-        return crash(); // TODO: H2.1 - remove if implemented
+        return linearSearchRecursiveHelper(arr, target, 0);
     }
 
     /**
@@ -28,7 +28,14 @@ public class LinearSearch {
      */
     @StudentImplementationRequired
     public static int linearSearchRecursiveHelper(int[] arr, int target, int index) {
-        return crash(); // TODO: H2.1 - remove if implemented
+        if (index >= arr.length){
+            return -1;
+        } else if (arr[index] == target){
+            return index;
+        } else {
+            return linearSearchRecursiveHelper(arr, target, index + 1);
+        }
+
     }
 
     /**
@@ -40,6 +47,11 @@ public class LinearSearch {
      */
     @StudentImplementationRequired
     public static int linearSearchIterative(int[] arr, int target) {
-        return crash(); // TODO: H2.2 - remove if implemented
+        for (int i = 0; i < arr.length; i++){
+            if (arr[i] == target){
+                return i;
+            }
+        }
+        return -1;
     }
 }

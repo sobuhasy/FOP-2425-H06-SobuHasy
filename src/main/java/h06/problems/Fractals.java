@@ -29,8 +29,15 @@ public class Fractals {
      */
     @StudentImplementationRequired
     public static int pow(int a, int b) {
-        return crash(); // TODO: H3.1 - remove if implemented
+        if (b == 0){
+            return 1;
+        } else {
+            return a * pow(a, b-1);
+        }
+        // TODO: H3.1 - remove if implemented
     }
+
+
 
     /**
      * This method combines two arrays of DrawInstruction objects into a single array.
@@ -42,7 +49,19 @@ public class Fractals {
      */
     @StudentImplementationRequired
     public static DrawInstruction[] concatenate(DrawInstruction[] arr1, DrawInstruction[] arr2) {
-        return crash(); // TODO: H3.2 - remove if implemented
+        DrawInstruction[] result = new DrawInstruction[arr1.length + arr2.length];
+        int index = 0;
+
+        for (int i = 0; i < arr1.length; i++){
+            result[index] = arr1[i];
+        }
+
+        for (int i = 0; i < arr2.length; i++){
+            result[index] = arr2[i];
+        }
+
+        return result;
+        // TODO: H3.2 - remove if implemented
     }
 
     /**
@@ -56,7 +75,16 @@ public class Fractals {
      */
     @StudentImplementationRequired
     public static DrawInstruction[] replaceAtIndex(DrawInstruction[] arr, int idx, DrawInstruction elem) {
-        return crash(); // TODO: H3.3 - remove if implemented
+        DrawInstruction[] result = new DrawInstruction[arr.length];
+        for (int i = 0; i < arr.length; i++){
+            if (i == idx){
+                result[i] = elem;
+            } else {
+                result[i] = arr[i];
+            }
+        }
+        return result;
+        // TODO: H3.3 - remove if implemented
     }
 
     /**
@@ -67,7 +95,22 @@ public class Fractals {
      */
     @StudentImplementationRequired
     public static DrawInstruction[] dragonCurve(int n) {
-        return crash(); // TODO: H3.4 - remove if implemented
+        if (n <= 0){
+            return new DrawInstruction[]{DrawInstruction.DRAW_LINE};
+        } else if (n == 1) {
+            return new DrawInstruction[]{
+                DrawInstruction.DRAW_LINE,
+                DrawInstruction.TURN_RIGHT,
+                DrawInstruction.DRAW_LINE
+            };
+        } else {
+            DrawInstruction[] previous = dragonCurve(n - 1);
+            DrawInstruction[] reversed = replaceAtIndex(
+                dragonCurve(n - 1), (int) Math.pow(2, n - 1) - 1, DrawInstruction.TURN_LEFT
+            );
+            return concatenate(concatenate(previous, new DrawInstruction[]{DrawInstruction.TURN_RIGHT}), reversed);
+        }
+        // TODO: H3.4 - remove if implemented
     }
 
     /**
@@ -78,6 +121,42 @@ public class Fractals {
      */
     @StudentImplementationRequired
     public static DrawInstruction[] kochSnowflake(int n) {
-        return crash(); // TODO: H3.5 - remove if implemented
+        if (n <= 0){
+            return new DrawInstruction[]{
+                DrawInstruction.DRAW_LINE,
+                DrawInstruction.TURN_RIGHT,
+                DrawInstruction.TURN_RIGHT,
+                DrawInstruction.DRAW_LINE,
+                DrawInstruction.TURN_RIGHT,
+                DrawInstruction.TURN_RIGHT,
+                DrawInstruction.DRAW_LINE
+            };
+        } else {
+            DrawInstruction[] prev = kochSnowflake(n - 1);
+            int ct = 0;
+            for (DrawInstruction instruction : prev){
+                if (instruction == DrawInstruction.DRAW_LINE){
+                    ct++;
+                }
+            }
+            DrawInstruction[] result = new DrawInstruction[prev.length + ct * 7];
+            int index = 0;
+            for (DrawInstruction instruction : prev){
+                if(instruction == DrawInstruction.DRAW_LINE){
+                    result[index++] = DrawInstruction.DRAW_LINE;
+                    result[index++] = DrawInstruction.TURN_LEFT;
+                    result[index++] = DrawInstruction.DRAW_LINE;
+                    result[index++] = DrawInstruction.TURN_RIGHT;
+                    result[index++] = DrawInstruction.TURN_RIGHT;
+                    result[index++] = DrawInstruction.DRAW_LINE;
+                    result[index++] = DrawInstruction.TURN_LEFT;
+                    result[index++] = DrawInstruction.DRAW_LINE;
+                } else {
+                    result[index++] = instruction;
+                }
+            }
+            return result;
+        }
+        // TODO: H3.5 - remove if implemented
     }
 }
